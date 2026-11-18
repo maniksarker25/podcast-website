@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Preach Radio — website
 
-## Getting Started
-
-First, run the development server:
+Marketing and information site for Preach Radio: home, about, creators, support, terms and privacy.
+Static (no APIs, no database). Next.js 16 (App Router, Server Components), TypeScript, Tailwind CSS 4,
+shadcn/ui (Radix, "Maia" preset) and Hugeicons. Dark and light themes via `next-themes`.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build (all pages prerender as static HTML)
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things live
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Path | What |
+|---|---|
+| `src/app/` | Routes, metadata, `sitemap.ts`, `robots.ts`, `opengraph-image.tsx`, `not-found.tsx` |
+| `src/config/site.ts` | Site name, URL, **contact emails**, **app-store links**, navigation |
+| `src/content/` | All copy and mock data: `showcase.ts`, `creator-insights.ts`, `faq.ts`, `legal/terms.ts`, `legal/privacy.ts` |
+| `src/components/layout/` | Header, mobile menu, theme toggle, footer, logo |
+| `src/components/sections/home/` | Home page sections |
+| `src/components/creators/` | Creators page sections and the SVG charts |
+| `src/components/about/`, `support/`, `legal/` | Page-specific components |
+| `src/components/shared/` | Section headings, buttons, cover art, waveform, phone frame, store buttons |
+| `src/components/ui/` | shadcn/ui components |
+| `src/app/globals.css` | Design tokens (light + dark), fonts, motion |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Common edits
 
-## Learn More
+- **App store links:** set `appLinks.appStore` / `appLinks.googlePlay` in `src/config/site.ts`.
+  While a link is `null`, its badge shows "Coming soon" and is not clickable.
+- **Contact emails / domain:** `src/config/site.ts` (or set `NEXT_PUBLIC_SITE_URL`).
+- **Terms / Privacy text:** edit `src/content/legal/*.ts` (sections of paragraph, list, subheading
+  and callout blocks) and update `lastUpdated`. To load them from a CMS or the backend instead,
+  change `getLegalDocument()` in `src/lib/legal.ts` — pages and components stay the same.
+- **FAQ:** `src/content/faq.ts`.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All names and numbers in the product previews (`src/content/showcase.ts`,
+`src/content/creator-insights.ts`) are fictional; dashboard previews are labelled "Example data".
