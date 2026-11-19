@@ -21,9 +21,9 @@ export const siteConfig = {
   },
   nav: [
     { label: "Home", href: "/" },
-    // { label: "About", href: "/about" },
-    // { label: "Creators", href: "/creators" },
-    // { label: "Support", href: "/support" },
+    { label: "About", href: "/about" },
+    { label: "Creators", href: "/creators" },
+    { label: "Support", href: "/support" },
   ] satisfies NavItem[],
   legal: [
     { label: "Terms & Conditions", href: "/terms" },
